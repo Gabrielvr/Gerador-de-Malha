@@ -162,7 +162,7 @@
     J=0  !ELEMENTO TRIANGULAR
     W=NR !NÚMERO DE ELEMENTOS 
     R=NR
-    Q=0
+    Q=0  !NÚMERO DE PONTOS
     O=0
     S1=S1+1
     C=1
@@ -272,8 +272,41 @@
              S1=S1+1
              O=O+2
          ELSEIF (3*PI/2<A<=2*PI) THEN
+            H2=SQRT(3.0)*A2/2
             
-             
+            B1=ACOS(V3/A2) !Ângulo em relação ao vetor unitário X
+            
+            C1=REF(ELL(B,2),2)-REF(ELL(B,2),2)
+            IF (C1<0) THEN
+                 B1=B1*(-1)
+            ENDIF
+            
+            A=B1+PI/2 !Ângulo total
+            REF(S1,1)=(0.5*REF(ELL(B,1),1)+0.5*REF(ELL(B,2),1))+H2*COS(A)
+            REF(S1,2)=(0.5*REF(ELL(B,1),2)+0.5*REF(ELL(B,2),2))+H2*SIN(A)
+            
+            Q=Q+1
+            J=J+1
+            IREF2(J,1)=ELL(B,1)
+            IREF2(J,2)=ELL(B,2)
+            IREF2(J,3)=S1
+            
+            R=R+1
+            ELL(R,1)=ELL(B,1)
+            ELL(R,2)=S1
+            ELL(R,3)=0
+            
+            R=R+1
+            ELL(R,1)=S1
+            ELL(R,2)=ELL(B,2)
+            ELL(R,3)=0
+            
+            ELL(B,3)=0
+            ELL(C,3)=0
+            
+            S1=S1+1
+            O=O+1
+            
          ENDIF
          
          C=1
