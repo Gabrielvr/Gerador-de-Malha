@@ -171,27 +171,34 @@
     
     DO WHILE (P==0)
         
-        DO
-            C=C+1
-            G=ELL(C,3)
-            IF (G==0) EXIT
-            IF (C==R) EXIT
-        ENDDO
+    
+            DO
+                C=C+1
+                G=ELL(C,3)
+                IF (C==R+1) EXIT
+                IF (G==0) EXIT
+            ENDDO
         
-        G=ELL(C,1)
-        ELL(C,3)=1
-        
-        DO
-            B=B+1
-            N=ELL(B,2)
-            T=ELL(B,3)
-            IF (N==G) THEN
-                IF (T==0) EXIT
-            ENDIF
-            IF (B==R) EXIT
-        ENDDO
+            G=ELL(C,1)
+            ELL(C,3)=1
             
-         
+            DO
+                B=B+1
+                N=ELL(B,2)
+                T=ELL(B,3)
+                IF (B==R+1) EXIT
+                IF (T==1) CYCLE
+                IF (N==G) EXIT
+                IF (N/=G) CYCLE
+                
+            ENDDO
+        Z=0
+        IF (B==R+1) THEN
+            Z=1
+            B=0
+            ELL(C,3)=0
+        ENDIF
+        IF (Z==0) THEN 
          A1=SQRT(((REF(ELL(C,2),1)-REF(ELL(C,1),1))**2)+((REF(ELL(C,2),2)-REF(ELL(C,1),2))**2))   !Norma do elemento I+1
          A2=SQRT(((REF(ELL(B,2),1)-REF(ELL(B,1),1))**2)+((REF(ELL(B,2),2)-REF(ELL(B,1),2))**2))   !Norma do elemento B
          
@@ -309,12 +316,16 @@
             
          ENDIF
          
+         !IF (R==107) THEN
+             !ELL(R,3)=1
+         !ENDIF
          C=1
          B=0
          I=I+1
          IF (I>=150) THEN   
          P=P+1
          ENDIF
+        ENDIF
     ENDDO
     
     !***********************************************************************************************************************************************
