@@ -228,13 +228,13 @@
             ELL(R,2)=ELL(C,2)
             ELL(R,3)=0
             
-            CALL DISTR
+            
             
             ELL(B,3)=1
             ELL(C,3)=1
             
             O=O+1
-            S1=S1+1
+
          ELSEIF (PI/2<A<=3*PI/2) THEN
              H1=SQRT(3.0)*A2/2   !ALTURA DO TRIÂNGULO
              H2=SQRT(3.0)*A1/2
@@ -437,22 +437,7 @@
         ENDDO
     END SUBROUTINE
     
-    SUBROUTINE DISTR
-        D1=SQRT(((REF(ELL(R,2),1)-REF(ELL(R,1),1))**2)+((REF(ELL(R,2),2)-REF(ELL(R,1),2))**2))
-        
-        IF (D1>1.6*1.62) THEN
-            
-            REF(S1,1)=0.5*REF(ELL(R,1),1)+0.5*REF(ELL(R,2),1)
-            REF(S1,2)=0.5*REF(ELL(R,1),2)+0.5*REF(ELL(R,2),2)
-            
-            Q=Q+1
-            ELL(R,2)=S1
-            ELL(R+1,1)=S1
-            ELL(R+1,2)=ELL(C,2)
-            
-            R=R+1           
-        ENDIF
-    ENDSUBROUTINE 
+   
                                                                       
    end program GeradordeMalha
 
