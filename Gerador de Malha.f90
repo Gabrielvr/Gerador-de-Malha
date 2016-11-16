@@ -33,8 +33,8 @@
     OPEN(5,FILE='INPUT.TXT', STATUS='OLD')
     OPEN(6,FILE='OUTPUTN.TXT', STATUS='UNKNOWN')
     !OPEN(6,FILE='OUTPUTN.POS', STATUS='UNKNOWN')
-    OPEN(7,FILE='OUTPUTP.TXT', STATUS='UNKNOWN')
-    !OPEN(7,FILE='OUTPUTP.POS', STATUS='UNKNOWN')
+    !OPEN(7,FILE='OUTPUTP.TXT', STATUS='UNKNOWN')
+    OPEN(7,FILE='OUTPUTP.POS', STATUS='UNKNOWN')
     READ(5,*) NDIME
     READ(5,*) NNO
     READ(5,*) NEL
@@ -316,16 +316,23 @@
             
          ENDIF
          
-         !IF (R==107) THEN
-             !ELL(R,3)=1
-         !ENDIF
+         
          C=1
          B=0
          I=I+1
-         IF (I>=150) THEN   
+         IF (I>=141) THEN   
          P=P+1
          ENDIF
         ENDIF
+    ENDDO
+    
+    DO I=142,159
+        
+        J=J+1
+        IREF2(J,1)=I-1
+        IREF2(J,2)=I
+        IREF2(J,3)=161
+        O=O+1
     ENDDO
     
     !***********************************************************************************************************************************************
@@ -358,7 +365,7 @@
     WRITE(7,*)
     WRITE(7,*) '%ELEMENT.T3'
     WRITE(7,*) O
-        DO  I=1,O                   
+        DO  I=1,O                  
             write(7,'(i6,2x,i3,2x,i3,2x,i3,2x,i4,2x,i4,2x,i4)') I, 1, 1, 1, (IREF2(I,J),J=1,3)
         ENDDO 
     WRITE (7,'(A)')'%END'                                                              
