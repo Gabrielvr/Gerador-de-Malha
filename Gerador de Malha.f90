@@ -33,8 +33,8 @@
     OPEN(5,FILE='INPUT.TXT', STATUS='OLD')
     !OPEN(6,FILE='OUTPUTN.TXT', STATUS='UNKNOWN')
     OPEN(6,FILE='OUTPUTN.POS', STATUS='UNKNOWN')
-    !OPEN(7,FILE='OUTPUTP.TXT', STATUS='UNKNOWN')
-    OPEN(7,FILE='OUTPUTP.POS', STATUS='UNKNOWN')
+    OPEN(7,FILE='OUTPUTP.TXT', STATUS='UNKNOWN')
+    !OPEN(7,FILE='OUTPUTP.POS', STATUS='UNKNOWN')
     READ(5,*) NDIME
     READ(5,*) NNO
     READ(5,*) NEL
@@ -325,7 +325,7 @@
          C=1
          B=0
          I=I+1
-         IF (I>=478) THEN   
+         IF (I>=50) THEN   
          P=P+1
          ENDIF
         ENDIF
