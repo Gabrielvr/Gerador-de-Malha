@@ -31,8 +31,8 @@
     
     !LEITURA DE DADOS
     OPEN(5,FILE='INPUT.TXT', STATUS='OLD')
-    OPEN(6,FILE='OUTPUTN.TXT', STATUS='UNKNOWN')
-    !OPEN(6,FILE='OUTPUTN.POS', STATUS='UNKNOWN')
+    !OPEN(6,FILE='OUTPUTN.TXT', STATUS='UNKNOWN')
+    OPEN(6,FILE='OUTPUTN.POS', STATUS='UNKNOWN')
     !OPEN(7,FILE='OUTPUTP.TXT', STATUS='UNKNOWN')
     OPEN(7,FILE='OUTPUTP.POS', STATUS='UNKNOWN')
     READ(5,*) NDIME
@@ -212,9 +212,13 @@
          !Verificação de vértice
          A3=0.5*(REF(ELL(B,1),1)*REF(ELL(B,2),2)-REF(ELL(B,1),2)*REF(ELL(B,2),1)+REF(ELL(C,1),1)*REF(ELL(C,2),2)-REF(ELL(C,1),2)*REF(ELL(C,2),1)) 
          
-         IF (A3<0) THEN
-             A=PI-2*A       !Correção do ângulo interno
+         IF (A3<=0) THEN
+             Y=Y+1
          ENDIF
+         
+         !IF (A3<0) THEN
+            ! A=PI-2*A       !Correção do ângulo interno
+         !ENDIF
          
          IF (A<=PI/2) THEN
              
@@ -238,7 +242,8 @@
          ELSEIF (PI/2<A<=3*PI/2) THEN
              H1=SQRT(3.0)*A2/2   !ALTURA DO TRIÂNGULO
              H2=SQRT(3.0)*A1/2
-             H3=(H1+H2)/2
+             H3=0.86
+             
              
              A=A/2 !ÂNGULO INTERNO
              B1=ACOS(V1/A1)  !ÂNGULO EM RELAÇÃO AO VETOR UNITÁRIO X
@@ -320,20 +325,13 @@
          C=1
          B=0
          I=I+1
-         IF (I>=141) THEN   
+         IF (I>=478) THEN   
          P=P+1
          ENDIF
         ENDIF
     ENDDO
     
-    DO I=142,159
-        
-        J=J+1
-        IREF2(J,1)=I-1
-        IREF2(J,2)=I
-        IREF2(J,3)=161
-        O=O+1
-    ENDDO
+
     
     !***********************************************************************************************************************************************
                                                                     !ARQUIVO .TXT POS3D
