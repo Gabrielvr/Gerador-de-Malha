@@ -16,7 +16,8 @@
     
     !VARIÁVEIS
     INTEGER NDIME, NNO, NEL, NNOEL, M, Q, C, R, S, W, O !Número de dimensões, Número de nós, Número de elementos, Número de nós por elemento
-    REAL*8 L, A, X, Y, PI, da, db, dc, P, B, N, A1, B1, Dab, X1, X2, H, D, E, U, V
+    REAL*8 L, A, X, Y, PI, da, db, dc, P, B, N, A1, B1, Dab, X1, X2, H, D, E, U, V, V1, V2, V3, V4
+   
     INTEGER, ALLOCATABLE:: INC(:,:), VET(:), IREF(:,:), IREF2(:,:), CONT(:), ELL(:,:), ELT(:,:)
     REAL*8, ALLOCATABLE:: COORD(:,:), REF(:,:), DIST(:)
     
@@ -165,24 +166,29 @@
     Q=0  !NÚMERO DE PONTOS
     O=0
     S1=S1+1
-    C=1
     F=0
     B=0
     Z=0
     
     DO WHILE (P==0)
         
-        DO I=1,R
+        F=0
+        C=0
+        DO H=1,R
+            C=C+1
             G=ELL(C,3)
             IF (G==0) THEN
                 F=F+1
             ENDIF
-            IF (F==0) THEN
-                P=1
-                Z=1
-            ENDIF
         ENDDO
         
+        IF (F==3) THEN
+                P=1
+                Z=1
+        ENDIF
+        
+        C=1
+    
         IF (Z==0) THEN 
             DO
                 C=C+1
@@ -332,7 +338,7 @@
          C=1
          B=0
          I=I+1
-         IF (I>=478) THEN   
+         IF (I>1000) THEN   
          P=P+1
          ENDIF
         ENDIF
